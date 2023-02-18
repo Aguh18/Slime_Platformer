@@ -47,39 +47,7 @@ public class PlayerController : MonoBehaviour
         Move();
     }
     
-    private void Move(){
-        rightleft = Input.GetAxisRaw("Horizontal");
-
-        if (rightleft != 0){
-            anim.SetTrigger(walkcondition);
-        }
-        else{
-            anim.SetTrigger(Idle_Condition);
-        }
-        rb.velocity = new Vector2(rightleft * Movespeed, rb.velocity.y);
-        if (rightleft > 0 && !Isfacingright){
-            transform.eulerAngles = Vector2.zero;
-            Isfacingright = true;
-        }
-        else if( rightleft < 0 && Isfacingright) {
-            transform.eulerAngles = Vector2.up * 180;
-            Isfacingright = false;
-        }
-    }
-
-    void Jump(){
-        if ( Input.GetKeyDown(KeyCode.Space) && Isgrounded() || Input.GetKeyDown(KeyCode.W) &&  Isgrounded()){
-            rb.velocity = Vector2.up * jumpforce;
-        }
-        if (!Isgrounded() && !Isjumping){
-            anim.SetTrigger(jumpcondition);
-            Isjumping = true;
-        }
-        else if(Isgrounded()&& Isjumping){
-            anim.SetTrigger(landcondition);
-            Isjumping = false;
-        }
-    }
+    
     bool Isgrounded(){
         return Physics2D.OverlapCircle(Ground.position,radius,whatisground);
     }
